@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, memo, ReactNode, useEffect, useMemo } from "react";
 
 
 type DefaultData = {
@@ -11,10 +11,15 @@ type LayoutProps = {
     children?: ReactNode
 }
 
-export const Layout: FC<LayoutProps> = ({_default: def, header, footer, children}) => {
+export const Layout: FC<LayoutProps> = memo(({_default: def, header, footer, children}) => {
 
-    const headerTemplate = typeof header === 'function' ? header() :  header
-    const footerTemplate = typeof footer === 'function' ? footer() :  footer
+    const headerTemplate = useMemo(() => typeof header === 'function' ? header() :  header, [header])
+    const footerTemplate = useMemo(() => typeof footer === 'function' ? footer() :  footer, [footer])
+
+
+    useEffect(() => {
+        console.log('rednering layout');
+    },[header, footer, children])
 
     return (
         <>
@@ -31,4 +36,4 @@ export const Layout: FC<LayoutProps> = ({_default: def, header, footer, children
             </footer>}
         </>
     )
-}
+})
