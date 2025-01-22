@@ -16,6 +16,7 @@ function WithGreeting(text: string = ''){
 
     componentDidMount(): void {
       setGreeting(text)
+      console.log(this.props);
     }
 
 
@@ -43,9 +44,13 @@ function App() {
 
      <button onClick={counter}>Click {count}</button>
    
-      <Layout header={<h2>Header</h2>} footer={<h2>Footer</h2>}>
+      <Layout 
+      header={<h2>Header</h2>} 
+      footer={<h2>Footer</h2>}
+      >
         <h1>Content</h1>
         <Wrapper text='i love you' />
+       
       </Layout>
   
    
